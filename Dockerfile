@@ -1,11 +1,14 @@
-FROM jenkinsci/slave
+FROM jenkinsci/jnlp-slave
 
 USER root
-RUN apt-get update
-RUN apt-get install --no-cache \
-ca-certificates \
-curl \
-openssl
+
+RUN apt-get update -y
+RUN apt-get install -y jq \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common
 
 ENV DOCKER_BUCKET get.docker.com
 ENV DOCKER_VERSION 17.05.0-ce
@@ -25,11 +28,11 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 RUN chmod +x ./kubectl
 RUN mv ./kubectl /usr/local/bin/kubectl
 
-COPY docker-entrypoint.sh /usr/local/bin/
+# COPY docker-entrypoint.sh /usr/local/bin/
 
 COPY jenkins-slave /usr/local/bin/jenkins-slave
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bin/jenkins-slave
+# RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# RUN chmod +x /usr/local/bin/jenkins-slave
 
-ENTRYPOINT docker-entrypoint.sh; jenkins-slave
+# ENTRYPOINT docker-entrypoint.sh; jenkins-slave
