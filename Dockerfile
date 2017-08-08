@@ -1,7 +1,8 @@
 FROM jenkinsci/slave
 
 USER root
-RUN apk add --no-cache \
+RUN apt-get update
+RUN apt-get install --no-cache \
 ca-certificates \
 curl \
 openssl
