@@ -1,7 +1,7 @@
 FROM jenkinsci/jnlp-slave
 MAINTAINER Wei Cheng <calvinpohwc@gmail.com>
 
-ENV DOCKER_VERSION=17.04.0-ce DOCKER_COMPOSE_VERSION=1.14.0
+ENV DOCKER_VERSION=17.12.0-ce DOCKER_COMPOSE_VERSION=1.18.0
 
 USER root
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
